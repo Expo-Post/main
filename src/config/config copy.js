@@ -1,5 +1,4 @@
-{
+exports.config = {
     "PORT":3000,
-    "INDEX":"dev.html",
     "DEV":true
 }

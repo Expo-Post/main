@@ -7,4 +7,9 @@ but using what I do indeed know.
 
 I know express (js) and sqlite3 (sql). If it's better in a different way, feel free. I will adapt. This 'company' is just something I can use to dissosiate myself as a whole to possibly a group if it goes far.
 
-https://expo-post.com
+<https://expo-post.com>
+
+Note:
+Config File:
+config.js is, well, exactly like "config copy.js" but as a hidden file. This is to eventually hide things down the line without having to worry about 'config.js' being exposed.
+And yes. I know I will, by hand, have to edit it using nano but that is not my concern.
