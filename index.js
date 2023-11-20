@@ -16,7 +16,7 @@ var config = config.config;
 
 const PORT = config.PORT;
 const dev = config.DEV;
-const home_file = dev ? "dev.html" : "index.html"
+const home_file = dev ? "indexDev.ejs" : "indexActive.ejs";
  
 app.use(express.static(path.join(__dirname, 'files/js'))); 
 
@@ -28,7 +28,7 @@ app.get('/', function (req, res, next) {
         }
     } catch(err) {/* Do nothing */}
 
-    res.sendFile(path.join(__dirname, `./files/html/${home_file}`));
+    res.render(home_file);
 })
 
 app.all("*", function (req, res, next) {
@@ -52,7 +52,7 @@ app.all("/index.html", (req, res, next) => {
 
 app.all("*", (req, res, next) => {
     //res.redirect("/")
-    res.render("./files/ejs/index.ejs")
+    res.render("404.ejs")
 })
 
 app.listen(PORT, function (err) {
