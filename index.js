@@ -16,13 +16,7 @@ var config = config.config;
 
 const PORT = config.PORT;
 const dev = config.DEV;
-if (dev == true) {
-    const home_file = "dev.html";
-} else {
-    const home_file = "index.html";
-}
-
-
+const home_file = dev ? "dev.html" : "index.html"
  
 app.use(express.static(path.join(__dirname, 'files/js'))); 
 
@@ -44,6 +38,21 @@ app.all("*", function (req, res, next) {
     } else {
         next();
     }
+})
+
+app.get("/index.html", (req, res, next) => {
+    res.redirect('/');
+    return;
+})
+
+app.all("/index.html", (req, res, next) => {
+    res.json('{"active":false');
+    return
+})
+
+app.all("*", (req, res, next) => {
+    //res.redirect("/")
+    res.render("./files/ejs/index.ejs")
 })
 
 app.listen(PORT, function (err) {
