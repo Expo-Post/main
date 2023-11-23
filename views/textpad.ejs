@@ -12,10 +12,31 @@
       <div class="jumbotron">
         <h1>Jot down your thoughts...</h1>
         <p>We promise we won't peek</p>
-        <input></input>
+        <textarea id="textpad" class="post-it"></textarea><br>
+        <button id="save_data" type="button" class="btn btn-secondary">Save your text</button>
+        <!-- Local Storage Time. As this should be client read only. -->
+        <script type="text/javascript">
+          var element = document.getElementById('textpad');
+          var button = document.getElementById('save_data');
+          try {
+          element.value = localStorage.getItem('textpad');
+          } catch(err) {} // Nothing to retrieve!
+          function save(type) {
+            localStorage.setItem("textpad", element.value);
+            console.log(type);
+            if(type == "button") {
+              //<button type="button" class="btn btn-success">Success</button>
+              button.setAttribute('class', "btn btn-success")
+              button.innerText = "Success!"
+              setTimeout(()=> {button.setAttribute('class', "btn btn-secondary"); button.innerText = "Save your text"}, 1000);
+            }
+          }
+          element.addEventListener("mouseleave", (event) => {save("mouse")});
+          button.addEventListener("click", (even) => {save("button")});
+        </script>
       </div>
     </main>
-
+      <%- include('../partials/cookielogic') %>
     <footer>
       <%- include('../partials/footer'); %>
     </footer>

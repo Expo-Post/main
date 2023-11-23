@@ -61,8 +61,16 @@ app.get('/', function (req, res, next) { //Main, does not need router.
             res.redirect("https://github.com/Expo-Post/main");
         }
     } catch(err) {/* Do nothing */} //TODO: Check err against 'params are missing' vs req error itself. [Optional]
-
-    res.render(home_file);
+    var cookies = req.cookies;
+    var cookieOK = 0;
+    try {
+        cookieOK = cookies.cookieOK;
+    } catch(err) {}
+    if (cookieOK == undefined || cookieOK == null) {
+        cookieOK = 0;
+        res.cookie("cookieOK", 0);
+    }
+    return res.cookie("where", "undefined").render(home_file, {x: cookieOK});
 })
 
 app.get("/index.html", (req, res, next) => { //Also doesnt need router.
@@ -78,4 +86,5 @@ app.use('*', fourofour); //404 handeler.
 app.listen(PORT, function (err) { //Launch server.
     if (err) console.log(err);
     console.log("Server listening on PORT", PORT);
+
 });
